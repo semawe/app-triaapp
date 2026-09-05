@@ -87,18 +87,6 @@ const eslintConfig = defineConfig([
   {
     files: ["**/*.{ts,tsx}"],
     rules: {
-      // `@eslint-react` couvre plus large que `eslint-plugin-react` qu'il
-      // remplace. Ces deux règles-là n'existaient pas dans le régime précédent
-      // et leurs constats ne sont pas des régressions : ils sont réels mais
-      // relèvent d'une passe à eux, consignée dans la tâche Notion 2204.
-      //
-      // `purity` ne signale ici que des `new Date()` dans des composants
-      // serveur asynchrones, où « maintenant » est l'instant de la requête.
-      // `no-array-index-key` ne porte que sur des listes de chaînes statiques
-      // sans identité propre (domaines, redevabilités, lignes de texte
-      // découpées), jamais réordonnées.
-      "@eslint-react/purity": "off",
-      "@eslint-react/no-array-index-key": "off",
       // Le code s'autorise `_` en tête pour un paramètre volontairement inusité.
       "@typescript-eslint/no-unused-vars": [
         "error",

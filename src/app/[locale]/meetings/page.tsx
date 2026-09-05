@@ -7,6 +7,7 @@ import { Link } from "@/i18n/navigation";
 import DecalageHoraire from "./DecalageHoraire";
 import { getLocale, getTranslations } from "next-intl/server";
 import type { Meeting, Space } from "@/generated/prisma";
+import { maintenant } from "@/lib/maintenant";
 
 type MeetingWithSpace = Meeting & { space: Space };
 
@@ -30,7 +31,7 @@ export default async function MeetingsPage({
     orderBy: { date: "desc" },
   });
 
-  const today = new Date().toISOString().split("T")[0];
+  const today = maintenant().toISOString().split("T")[0];
 
   if (groupBySpace) {
     const bySpace = new Map<string, { space: Space; meetings: MeetingWithSpace[] }>();

@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import AppShell from "@/components/AppShell";
 import { toggleOutputDone } from "@/actions/output";
 import { Link } from "@/i18n/navigation";
+import { maintenant } from "@/lib/maintenant";
 
 const OUTPUT_TYPE_COLORS: Record<string, string> = {
   action: "bg-blue-900 text-blue-300",
@@ -120,7 +121,7 @@ async function ActionRow({
   const toggle = toggleOutputDone.bind(null, o.id);
   const meetingDate = o.item.meeting.date.toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
   const meetingLabel = o.item.meeting.title ?? `Triage · ${meetingDate}`;
-  const isOverdue = o.dueDate && !o.isDone && new Date(o.dueDate) < new Date();
+  const isOverdue = o.dueDate && !o.isDone && new Date(o.dueDate) < maintenant();
 
   return (
     <div className="flex items-start gap-4 rounded-xl bg-gray-900 border border-gray-800 px-5 py-4">

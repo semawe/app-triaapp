@@ -12,6 +12,7 @@ import {
   deleteProjectTask,
 } from "@/actions/projectTask";
 import type { ProjectTaskStatus } from "@/generated/prisma";
+import { maintenant } from "@/lib/maintenant";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -171,7 +172,7 @@ async function TaskCard({
 }) {
   const tr = await getTranslations("projectTasks");
   const statuses = TASK_STATUSES.map((status) => ({ ...status, label: tr(status.labelKey) }));
-  const isOverdue = t.dueDate && t.status !== "done" && new Date(t.dueDate) < new Date();
+  const isOverdue = t.dueDate && t.status !== "done" && new Date(t.dueDate) < maintenant();
 
   return (
     <div className="rounded-lg bg-gray-800/60 border border-gray-800 px-3 py-2.5 space-y-1.5">

@@ -130,7 +130,11 @@ function SpaceNode({
       <circle cx={x} cy={y} r={r} fill={`${color}${isSelected ? "33" : "1a"}`}
         stroke={color} strokeWidth={isSelected ? 3 : 1.5} />
 
+      {/* L'index est ici l'identité de la ligne : `lines` est le découpage d'un
+          seul libellé, l'ordre en est le sens et il pilote la position verticale.
+          Deux lignes peuvent porter le même texte sans être la même ligne. */}
       {lines.map((line, li) => (
+        // eslint-disable-next-line @eslint-react/no-array-index-key
         <text key={li} x={x} y={nameTopY + li * lh}
           textAnchor="middle" dominantBaseline="hanging"
           fill={color} fontSize={r > 80 ? 11 : r > 65 ? 10 : 9} fontWeight="600"
@@ -180,7 +184,11 @@ function RoleNode({
       <circle cx={x} cy={y} r={r}
         fill={isMe || isSelected ? `${ROLE_COLOR}40` : `${ROLE_COLOR}14`}
         stroke={ROLE_COLOR} strokeWidth={isSelected ? 2.5 : r < 8 ? 1 : 1.2} />
+      {/* L'index est ici l'identité de la ligne : `lines` est le découpage d'un
+          seul libellé, l'ordre en est le sens et il pilote la position verticale.
+          Deux lignes peuvent porter le même texte sans être la même ligne. */}
       {lines.map((line, li) => (
+        // eslint-disable-next-line @eslint-react/no-array-index-key
         <text key={li} x={x} y={nameTopY + li * lh}
           textAnchor="middle" dominantBaseline="hanging"
           fill={ROLE_COLOR} fontSize={r > 34 ? 8.5 : 7.5} fontWeight="600"
@@ -515,8 +523,8 @@ export default function CircleViz({
                   <div className="space-y-1">
                     <p className="text-xs text-gray-600 font-medium uppercase tracking-wider">{t("domains")}</p>
                     <ul className="space-y-0.5">
-                      {selected.role.domains.map((d, i) => (
-                        <li key={i} className="text-xs text-gray-400 flex gap-2">
+                      {selected.role.domains.map((d) => (
+                        <li key={d} className="text-xs text-gray-400 flex gap-2">
                           <span className="text-gray-600 shrink-0">·</span>{d}
                         </li>
                       ))}
@@ -527,8 +535,8 @@ export default function CircleViz({
                   <div className="space-y-1">
                     <p className="text-xs text-gray-600 font-medium uppercase tracking-wider">{t("accountabilities")}</p>
                     <ul className="space-y-0.5">
-                      {selected.role.accountabilities.map((a, i) => (
-                        <li key={i} className="text-xs text-gray-400 flex gap-2">
+                      {selected.role.accountabilities.map((a) => (
+                        <li key={a} className="text-xs text-gray-400 flex gap-2">
                           <span className="text-gray-600 shrink-0">·</span>{a}
                         </li>
                       ))}

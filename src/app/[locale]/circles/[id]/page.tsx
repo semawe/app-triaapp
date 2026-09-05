@@ -352,8 +352,8 @@ export default async function CircleDetailPage({ params, searchParams }: Props) 
                   <div>
                     <p className="text-xs text-gray-500 mb-1">{t("domains")}</p>
                     <ul className="space-y-1">
-                      {space.domains.map((d, i) => (
-                        <li key={i} className="text-sm text-gray-300 flex gap-2">
+                      {space.domains.map((d) => (
+                        <li key={d} className="text-sm text-gray-300 flex gap-2">
                           <span className="text-gray-600 shrink-0">·</span>{d}
                         </li>
                       ))}
@@ -364,8 +364,8 @@ export default async function CircleDetailPage({ params, searchParams }: Props) 
                   <div>
                     <p className="text-xs text-gray-500 mb-1">{t("accountabilities")}</p>
                     <ul className="space-y-1">
-                      {space.accountabilities.map((a, i) => (
-                        <li key={i} className="text-sm text-gray-300 flex gap-2">
+                      {space.accountabilities.map((a) => (
+                        <li key={a} className="text-sm text-gray-300 flex gap-2">
                           <span className="text-gray-600 shrink-0">·</span>{a}
                         </li>
                       ))}
@@ -443,8 +443,8 @@ export default async function CircleDetailPage({ params, searchParams }: Props) 
                           <div>
                             <span className="text-xs text-gray-600 font-medium">{t("accountabilitiesLabel")} </span>
                             <ul className="mt-1 space-y-0.5">
-                              {role.accountabilities.map((a, i) => (
-                                <li key={i} className="text-xs text-gray-400 flex gap-2">
+                              {role.accountabilities.map((a) => (
+                                <li key={a} className="text-xs text-gray-400 flex gap-2">
                                   <span className="text-gray-600 shrink-0">·</span>{a}
                                 </li>
                               ))}

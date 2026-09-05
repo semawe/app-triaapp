@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import { acceptInvite } from "@/actions/member";
+import { maintenant } from "@/lib/maintenant";
 
 type Props = {
   params: Promise<{ token: string; locale: string }>;
@@ -28,7 +29,7 @@ export default async function InvitePage({ params, searchParams }: Props) {
     include: { organisation: true },
   });
 
-  if (!invite || invite.expiresAt < new Date()) {
+  if (!invite || invite.expiresAt < maintenant()) {
     return (
       <main className="min-h-screen bg-gray-950 flex items-center justify-center">
         <div className="text-center space-y-3">
