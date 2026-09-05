@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 
 import {
   createContext,
-  useContext,
+  use,
   useState,
   useTransition,
   type ReactNode,
@@ -29,9 +29,9 @@ const UnsavedOutputContext = createContext<{
 export function UnsavedOutputProvider({ children }: { children: ReactNode }) {
   const [dirty, setDirty] = useState(false);
   return (
-    <UnsavedOutputContext.Provider value={{ dirty, setDirty }}>
+    <UnsavedOutputContext value={{ dirty, setDirty }}>
       {children}
-    </UnsavedOutputContext.Provider>
+    </UnsavedOutputContext>
   );
 }
 
@@ -48,7 +48,7 @@ export function GuardedNavForm({
   className?: string;
   children: ReactNode;
 }) {
-  const { dirty } = useContext(UnsavedOutputContext);
+  const { dirty } = use(UnsavedOutputContext);
   const t = useTranslations("outputs");
   return (
     <form
@@ -91,7 +91,7 @@ export function OutputEntry({
   showGovernance: boolean;
   members: Member[];
 }) {
-  const { setDirty } = useContext(UnsavedOutputContext);
+  const { setDirty } = use(UnsavedOutputContext);
   const [content, setContent] = useState("");
   const [erreur, setErreur] = useState<string | null>(null);
   const t = useTranslations("outputs");

@@ -20,11 +20,11 @@ import { useEffect, useRef } from "react";
  * pas une régression.
  */
 export default function DecalageHoraire() {
-  const champ = useRef<HTMLInputElement>(null);
+  const champRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (champ.current) champ.current.value = String(new Date().getTimezoneOffset());
+    if (champRef.current) champRef.current.value = String(new Date().getTimezoneOffset());
   }, []);
 
-  return <input ref={champ} type="hidden" name="tzOffset" defaultValue="" />;
+  return <input ref={champRef} type="hidden" name="tzOffset" defaultValue="" />;
 }

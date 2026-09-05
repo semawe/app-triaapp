@@ -49,6 +49,10 @@ export default async function RootLayout({
         {children}
         <script
           nonce={nonce}
+          // Enregistrement du service worker : la seule voie pour poser ce script
+          // inline sous le nonce de la CSP. Le contenu est une constante du dépôt,
+          // sans aucune donnée extérieure interpolée.
+          // eslint-disable-next-line @eslint-react/dom-no-dangerously-set-innerhtml
           dangerouslySetInnerHTML={{
             __html: `if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js')}`,
           }}

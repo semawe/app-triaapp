@@ -7,6 +7,11 @@ export default function ItemChrono({ activatedAt }: { activatedAt: string }) {
 
   useEffect(() => {
     const start = new Date(activatedAt).getTime();
+    // Le premier appel est synchrone volontairement : l'état part de 0 pour que
+    // le rendu serveur et le premier rendu client coïncident, et ce tick rattrape
+    // le temps écoulé sans attendre la première seconde. Calculer la valeur dans
+    // l'initialiseur de useState ferait diverger les deux rendus.
+    // eslint-disable-next-line @eslint-react/set-state-in-effect
     const tick = () => setElapsed(Math.floor((Date.now() - start) / 1000));
     tick();
     const interval = setInterval(tick, 1000);
